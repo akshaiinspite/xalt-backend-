@@ -21,6 +21,8 @@ const jobRoutes = require('./routes/jobRoutes');
 const portfolioRoutes = require('./routes/portfolioRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const reelRoutes = require('./routes/reelRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -108,6 +110,8 @@ app.use('/api/jobs', jobRoutes);
 app.use('/api/portfolio', portfolioRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/reels', reelRoutes);
+app.use('/api/upload', uploadRoutes);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Start Server
 app.listen(PORT, () => {
