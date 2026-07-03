@@ -21,6 +21,7 @@ const jobRoutes = require('./routes/jobRoutes');
 const portfolioRoutes = require('./routes/portfolioRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const reelRoutes = require('./routes/reelRoutes');
+const expertiseRoutes = require('./routes/expertiseRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const path = require('path');
 
@@ -110,6 +111,7 @@ app.use('/api/jobs', jobRoutes);
 app.use('/api/portfolio', portfolioRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/reels', reelRoutes);
+app.use('/api/expertise', expertiseRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 

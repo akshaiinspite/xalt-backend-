@@ -3,6 +3,16 @@ const defaultPortfolio = require('./defaultPortfolio');
 
 let isMongoConnected = false;
 
+let inMemoryCategories = [];
+let inMemorySubcategories = [];
+let inMemoryProjects = [];
+let inMemoryReel = {
+  _id: 'reel-1',
+  title: 'X.ALT Showreel',
+  videoUrl: '/src/assets/videos/showreel.mp4'
+};
+let inMemoryAdmins = [];
+
 const inMemoryJobs = [
   {
     _id: 'job-1',
@@ -27,15 +37,40 @@ const inMemoryJobs = [
   }
 ];
 
-let inMemoryCategories = [];
-let inMemorySubcategories = [];
-let inMemoryProjects = [];
-let inMemoryReel = {
-  _id: 'reel-1',
-  title: 'X.ALT Showreel',
-  videoUrl: '/src/assets/videos/showreel.mp4'
-};
-let inMemoryAdmins = [];
+const defaultExpertise = [
+  {
+    _id: 'exp-1',
+    title: 'Films & Entertainment',
+    category: 'VFX & Post Production',
+    description: 'We curate and aggregate breathtaking visual sequences for feature films, leveraging deep relationships across the worldwide entertainment industry.',
+    image: '/uploads/gallery-img-1.jpg',
+    link: '#projects/films',
+    order: 0,
+    createdAt: new Date('2026-01-01')
+  },
+  {
+    _id: 'exp-2',
+    title: 'Commercial Projects',
+    category: 'CGI & Motion Design',
+    description: 'Seamlessly integrating premium tech aesthetics with robust design systems to elevate modern brand identities and digital experiences.',
+    image: '/uploads/gallery-img-3.jpg',
+    link: '#projects/commercial',
+    order: 1,
+    createdAt: new Date('2026-01-02')
+  },
+  {
+    _id: 'exp-3',
+    title: 'AR & VR Experiences',
+    category: 'Spatial Computing',
+    description: 'Immersive digital environments and spatial computing solutions that bridge the physical and virtual worlds for interactive storytelling.',
+    image: '/uploads/gallery-img-5.jpg',
+    link: '#projects/immersive',
+    order: 2,
+    createdAt: new Date('2026-01-03')
+  }
+];
+
+let inMemoryExpertise = JSON.parse(JSON.stringify(defaultExpertise));
 
 function seedMemoryPortfolio() {
   inMemoryCategories = defaultPortfolio.map(cat => ({
@@ -91,5 +126,7 @@ module.exports = {
   inMemorySubcategories,
   inMemoryProjects,
   inMemoryReel,
-  inMemoryAdmins
+  inMemoryAdmins,
+  defaultExpertise,
+  inMemoryExpertise
 };
