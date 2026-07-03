@@ -7,6 +7,7 @@ const projectSchema = new mongoose.Schema({
   tag: { type: String, required: true },
   code: { type: String, required: true },
   image: { type: String, required: true },
+  video: { type: String, default: '' },
   createdAt: { type: Date, default: Date.now }
 });
 

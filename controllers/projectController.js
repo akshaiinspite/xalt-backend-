@@ -15,7 +15,7 @@ exports.getAllProjects = async (req, res) => {
 };
 
 exports.createProject = async (req, res) => {
-  const { category, subcategory, title, tag, code, image } = req.body;
+  const { category, subcategory, title, tag, code, image, video } = req.body;
   if (!category || !subcategory || !title || !tag || !code || !image) {
     return res.status(400).json({ message: 'All project fields are required' });
   }
@@ -30,6 +30,7 @@ exports.createProject = async (req, res) => {
       tag,
       code,
       image,
+      video: video || '',
       createdAt: new Date()
     };
     inMemoryDb.inMemoryProjects.unshift(newProject);
@@ -37,7 +38,7 @@ exports.createProject = async (req, res) => {
   }
 
   try {
-    const newProject = new Project({ category, subcategory, title, tag, code, image });
+    const newProject = new Project({ category, subcategory, title, tag, code, image, video: video || '' });
     await newProject.save();
     res.status(201).json(newProject);
   } catch (err) {
@@ -46,7 +47,7 @@ exports.createProject = async (req, res) => {
 };
 
 exports.updateProject = async (req, res) => {
-  const { category, subcategory, title, tag, code, image } = req.body;
+  const { category, subcategory, title, tag, code, image, video } = req.body;
   if (!category || !subcategory || !title || !tag || !code || !image) {
     return res.status(400).json({ message: 'All project fields are required' });
   }
@@ -64,7 +65,8 @@ exports.updateProject = async (req, res) => {
       title,
       tag,
       code,
-      image
+      image,
+      video: video || ''
     };
     return res.json(inMemoryDb.inMemoryProjects[projIndex]);
   }
@@ -72,7 +74,7 @@ exports.updateProject = async (req, res) => {
   try {
     const updated = await Project.findByIdAndUpdate(
       req.params.id,
-      { category, subcategory, title, tag, code, image },
+      { category, subcategory, title, tag, code, image, video: video || '' },
       { new: true }
     );
     if (!updated) {
