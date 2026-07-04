@@ -14,6 +14,7 @@ const Admin = require('./models/Admin');
 const CategoryDetail = require('./models/CategoryDetail');
 const SubcategoryDetail = require('./models/SubcategoryDetail');
 const Project = require('./models/Project');
+const TeamMember = require('./models/TeamMember');
 
 // Routes
 const adminRoutes = require('./routes/adminRoutes');
@@ -23,6 +24,7 @@ const projectRoutes = require('./routes/projectRoutes');
 const reelRoutes = require('./routes/reelRoutes');
 const expertiseRoutes = require('./routes/expertiseRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
+const teamMemberRoutes = require('./routes/teamMemberRoutes');
 const path = require('path');
 
 const app = express();
@@ -91,6 +93,22 @@ async function seedDefaultPortfolio() {
   }
 }
 
+async function seedDefaultTeamMembers() {
+  try {
+    const memberCount = await TeamMember.countDocuments();
+    if (memberCount === 0) {
+      console.log('Seeding default team members to MongoDB...');
+      for (const member of inMemoryDb.defaultTeamMembers) {
+        const { _id, ...memberData } = member;
+        await TeamMember.create(memberData);
+      }
+      console.log('Seeding default team members completed successfully.');
+    }
+  } catch (err) {
+    console.error('Error seeding default team members:', err);
+  }
+}
+
 // Database Connection
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
@@ -98,6 +116,7 @@ mongoose.connect(process.env.MONGODB_URI)
     inMemoryDb.setIsMongoConnected(true);
     seedDefaultAdmin();
     seedDefaultPortfolio();
+    seedDefaultTeamMembers();
   })
   .catch(err => {
     console.warn('MongoDB connection failed. Switched to ROBUST IN-MEMORY FALLBACK DB.');
@@ -113,6 +132,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/reels', reelRoutes);
 app.use('/api/expertise', expertiseRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/team-members', teamMemberRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Start Server

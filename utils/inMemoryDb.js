@@ -119,6 +119,65 @@ async function seedMemoryAdmin() {
 seedMemoryPortfolio();
 seedMemoryAdmin();
 
+const defaultTeamMembers = [
+  {
+    _id: 'team-1',
+    name: 'Alex Mercer',
+    role: 'Founder / CEO',
+    department: 'ADMINISTRATIVE_CORE',
+    bio: 'Key visionary behind X.ALT. Directs administrative strategies, business partnerships, and structural expansion plans to redefine digital design standards.',
+    gradient: 'linear-gradient(135deg, #050505 0%, #300006 100%)',
+    order: 0
+  },
+  {
+    _id: 'team-2',
+    name: 'Sarah Connor',
+    role: 'Manager',
+    department: 'OPERATION_MGMT',
+    bio: 'Supervises studio workflow, project milestones, and resource allocation. Bridges organizational systems with production pipelines for flawless delivery.',
+    gradient: 'linear-gradient(135deg, #101012 0%, #440d16 100%)',
+    order: 1
+  },
+  {
+    _id: 'team-3',
+    name: 'David Miller',
+    role: 'Senior 3D Environment Artist',
+    department: 'CREATIVE_3D_LAB',
+    bio: 'Specializes in hyper-realistic 3D environment architecture, displacement shading, and immersive rendering techniques to develop state-of-the-art visual assets.',
+    gradient: 'linear-gradient(135deg, #1b0206 0%, #520510 100%)',
+    order: 2
+  },
+  {
+    _id: 'team-4',
+    name: 'Michael Chen',
+    role: 'Senior 3D Environment Artist',
+    department: 'CREATIVE_3D_LAB',
+    bio: 'Specializes in hyper-realistic 3D environment architecture, displacement shading, and immersive rendering techniques to develop state-of-the-art visual assets.',
+    gradient: 'linear-gradient(135deg, #161616 0%, #700a18 100%)',
+    order: 3
+  },
+  {
+    _id: 'team-5',
+    name: 'Marcus Vance',
+    role: 'Creative Director',
+    department: 'CREATIVE_3D_LAB',
+    bio: 'Specializes in hyper-realistic 3D environment architecture, displacement shading, and immersive rendering techniques to develop state-of-the-art visual assets.',
+    gradient: 'linear-gradient(135deg, #120318 0%, #4a030a 100%)',
+    order: 4
+  },
+  {
+    _id: 'team-6',
+    name: 'Liam Vance',
+    role: 'Partner',
+    department: 'CREATIVE_3D_LAB',
+    bio: 'Specializes in hyper-realistic 3D environment architecture, displacement shading, and immersive rendering techniques to develop state-of-the-art visual assets.',
+    gradient: 'linear-gradient(135deg, #040108 0%, #350218 100%)',
+    order: 5
+  }
+];
+
+let inMemoryTeamMembers = JSON.parse(JSON.stringify(defaultTeamMembers));
+
 module.exports = {
   getIsMongoConnected: () => isMongoConnected,
   setIsMongoConnected: (val) => { isMongoConnected = val; },
@@ -129,5 +188,7 @@ module.exports = {
   inMemoryReel,
   inMemoryAdmins,
   defaultExpertise,
-  inMemoryExpertise
+  inMemoryExpertise,
+  defaultTeamMembers,
+  inMemoryTeamMembers
 };
