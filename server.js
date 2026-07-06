@@ -25,6 +25,7 @@ const reelRoutes = require('./routes/reelRoutes');
 const expertiseRoutes = require('./routes/expertiseRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const teamMemberRoutes = require('./routes/teamMemberRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 const path = require('path');
 
 const app = express();
@@ -133,6 +134,7 @@ app.use('/api/reels', reelRoutes);
 app.use('/api/expertise', expertiseRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/team-members', teamMemberRoutes);
+app.use('/api/contact', contactRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Start Server
