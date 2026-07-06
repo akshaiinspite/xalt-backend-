@@ -34,7 +34,8 @@ exports.getPortfolio = async (req, res) => {
             title: proj.title,
             tag: proj.tag,
             code: proj.code,
-            image: proj.image
+            image: proj.image,
+            video: proj.video || ''
           }))
         };
       });
