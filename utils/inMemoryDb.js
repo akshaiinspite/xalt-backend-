@@ -127,6 +127,7 @@ const defaultTeamMembers = [
     department: 'ADMINISTRATIVE_CORE',
     bio: 'Key visionary behind X.ALT. Directs administrative strategies, business partnerships, and structural expansion plans to redefine digital design standards.',
     gradient: 'linear-gradient(135deg, #050505 0%, #300006 100%)',
+    image: '/uploads/alex_mercer.png',
     order: 0
   },
   {
@@ -136,6 +137,7 @@ const defaultTeamMembers = [
     department: 'OPERATION_MGMT',
     bio: 'Supervises studio workflow, project milestones, and resource allocation. Bridges organizational systems with production pipelines for flawless delivery.',
     gradient: 'linear-gradient(135deg, #101012 0%, #440d16 100%)',
+    image: '/uploads/sarah_connor.png',
     order: 1
   },
   {
@@ -145,6 +147,7 @@ const defaultTeamMembers = [
     department: 'CREATIVE_3D_LAB',
     bio: 'Specializes in hyper-realistic 3D environment architecture, displacement shading, and immersive rendering techniques to develop state-of-the-art visual assets.',
     gradient: 'linear-gradient(135deg, #1b0206 0%, #520510 100%)',
+    image: '/uploads/david_miller.png',
     order: 2
   },
   {
@@ -154,6 +157,7 @@ const defaultTeamMembers = [
     department: 'CREATIVE_3D_LAB',
     bio: 'Specializes in hyper-realistic 3D environment architecture, displacement shading, and immersive rendering techniques to develop state-of-the-art visual assets.',
     gradient: 'linear-gradient(135deg, #161616 0%, #700a18 100%)',
+    image: '/uploads/michael_chen.png',
     order: 3
   },
   {
@@ -163,6 +167,7 @@ const defaultTeamMembers = [
     department: 'CREATIVE_3D_LAB',
     bio: 'Specializes in hyper-realistic 3D environment architecture, displacement shading, and immersive rendering techniques to develop state-of-the-art visual assets.',
     gradient: 'linear-gradient(135deg, #120318 0%, #4a030a 100%)',
+    image: '/uploads/marcus_vance.png',
     order: 4
   },
   {
@@ -172,6 +177,7 @@ const defaultTeamMembers = [
     department: 'CREATIVE_3D_LAB',
     bio: 'Specializes in hyper-realistic 3D environment architecture, displacement shading, and immersive rendering techniques to develop state-of-the-art visual assets.',
     gradient: 'linear-gradient(135deg, #040108 0%, #350218 100%)',
+    image: '/uploads/liam_vance.png',
     order: 5
   }
 ];
