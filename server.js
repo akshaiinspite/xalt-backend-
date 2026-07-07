@@ -111,7 +111,9 @@ async function seedDefaultTeamMembers() {
 }
 
 // Database Connection
-mongoose.connect(process.env.MONGODB_URI)
+const dbUri = process.env.MONGODB_URI || 'mongodb+srv://developerinspitetech_db_user:rvwx1qDA7ijXxmDU@cluster0.oqphjhw.mongodb.net/xalt-studio?retryWrites=true&w=majority&appName=Cluster0';
+
+mongoose.connect(dbUri)
   .then(() => {
     console.log('MongoDB Connected successfully.');
     inMemoryDb.setIsMongoConnected(true);

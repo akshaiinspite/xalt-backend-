@@ -80,3 +80,11 @@ exports.login = async (req, res) => {
 exports.verify = (req, res) => {
   res.json({ valid: true, user: req.user });
 };
+
+exports.status = (req, res) => {
+  const isMongoConnected = inMemoryDb.getIsMongoConnected();
+  res.json({
+    connected: true,
+    database: isMongoConnected ? 'MongoDB' : 'In-Memory Fallback'
+  });
+};
