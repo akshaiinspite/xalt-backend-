@@ -15,8 +15,8 @@ exports.getAllProjects = async (req, res) => {
 };
 
 exports.createProject = async (req, res) => {
-  const { category, subcategory, title, tag, code, image, video } = req.body;
-  if (!category || !subcategory || !title || !tag || !code || !image) {
+  const { category, subcategory, title, tag, code, year, client, image, video } = req.body;
+  if (!category || !subcategory || !title || !tag || !image) {
     return res.status(400).json({ message: 'All project fields are required' });
   }
 
@@ -28,7 +28,9 @@ exports.createProject = async (req, res) => {
       subcategory,
       title,
       tag,
-      code,
+      code: code || year || '',
+      year: year || code || '',
+      client: client || '',
       image,
       video: video || '',
       createdAt: new Date()
@@ -38,7 +40,17 @@ exports.createProject = async (req, res) => {
   }
 
   try {
-    const newProject = new Project({ category, subcategory, title, tag, code, image, video: video || '' });
+    const newProject = new Project({
+      category,
+      subcategory,
+      title,
+      tag,
+      code: code || year || '',
+      year: year || code || '',
+      client: client || '',
+      image,
+      video: video || ''
+    });
     await newProject.save();
     res.status(201).json(newProject);
   } catch (err) {
@@ -47,8 +59,8 @@ exports.createProject = async (req, res) => {
 };
 
 exports.updateProject = async (req, res) => {
-  const { category, subcategory, title, tag, code, image, video } = req.body;
-  if (!category || !subcategory || !title || !tag || !code || !image) {
+  const { category, subcategory, title, tag, code, year, client, image, video } = req.body;
+  if (!category || !subcategory || !title || !tag || !image) {
     return res.status(400).json({ message: 'All project fields are required' });
   }
 
@@ -64,7 +76,9 @@ exports.updateProject = async (req, res) => {
       subcategory,
       title,
       tag,
-      code,
+      code: code || year || '',
+      year: year || code || '',
+      client: client || '',
       image,
       video: video || ''
     };
@@ -74,7 +88,17 @@ exports.updateProject = async (req, res) => {
   try {
     const updated = await Project.findByIdAndUpdate(
       req.params.id,
-      { category, subcategory, title, tag, code, image, video: video || '' },
+      {
+        category,
+        subcategory,
+        title,
+        tag,
+        code: code || year || '',
+        year: year || code || '',
+        client: client || '',
+        image,
+        video: video || ''
+      },
       { new: true }
     );
     if (!updated) {

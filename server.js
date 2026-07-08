@@ -86,7 +86,9 @@ async function seedDefaultPortfolio() {
               subcategory: sub.title,
               title: proj.title,
               tag: proj.tag,
-              code: proj.code,
+              code: proj.code || '',
+              year: proj.year || proj.code || '2026',
+              client: proj.client || '',
               image: proj.image
             });
           }

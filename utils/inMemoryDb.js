@@ -98,7 +98,9 @@ function seedMemoryPortfolio() {
           subcategory: sub.title,
           title: proj.title,
           tag: proj.tag,
-          code: proj.code,
+          code: proj.code || proj.year || '',
+          year: proj.year || proj.code || '',
+          client: proj.client || '',
           image: proj.image,
           video: proj.video || ''
         });
