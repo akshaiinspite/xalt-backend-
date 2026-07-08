@@ -24,7 +24,8 @@ exports.getExpertise = async (req, res) => {
     let items = await Expertise.find().sort({ order: 1, createdAt: 1 });
     // If MongoDB is connected but has no items, seed the default ones
     if (items.length === 0) {
-      const seeded = await Expertise.insertMany(inMemoryDb.defaultExpertise);
+      const seedData = inMemoryDb.defaultExpertise.map(({ _id, ...rest }) => rest);
+      const seeded = await Expertise.insertMany(seedData);
       return res.json(seeded);
     }
     
