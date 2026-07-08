@@ -15,7 +15,7 @@ exports.getAllTeamMembers = async (req, res) => {
 };
 
 exports.createTeamMember = async (req, res) => {
-  const { name, role, department, bio, gradient, image, order } = req.body;
+  const { name, role, department, bio, gradient, image, empNo, order } = req.body;
   if (!name) {
     return res.status(400).json({ message: 'Name is a required field' });
   }
@@ -30,6 +30,7 @@ exports.createTeamMember = async (req, res) => {
       bio: bio || '',
       gradient: gradient || 'linear-gradient(135deg, #161616 0%, #700a18 100%)',
       image: image || '',
+      empNo: empNo || '',
       order: order !== undefined ? Number(order) : 0,
       createdAt: new Date()
     };
@@ -47,6 +48,7 @@ exports.createTeamMember = async (req, res) => {
       bio: bio || '',
       gradient: gradient || 'linear-gradient(135deg, #161616 0%, #700a18 100%)',
       image: image || '',
+      empNo: empNo || '',
       order: order !== undefined ? Number(order) : 0
     });
     await newMember.save();
@@ -57,7 +59,7 @@ exports.createTeamMember = async (req, res) => {
 };
 
 exports.updateTeamMember = async (req, res) => {
-  const { name, role, department, bio, gradient, image, order } = req.body;
+  const { name, role, department, bio, gradient, image, empNo, order } = req.body;
   if (!name) {
     return res.status(400).json({ message: 'Name is a required field' });
   }
@@ -76,6 +78,7 @@ exports.updateTeamMember = async (req, res) => {
       bio: bio || '',
       gradient: gradient || 'linear-gradient(135deg, #161616 0%, #700a18 100%)',
       image: image || '',
+      empNo: empNo || '',
       order: order !== undefined ? Number(order) : 0
     };
     inMemoryDb.inMemoryTeamMembers.sort((a, b) => (a.order || 0) - (b.order || 0));
@@ -92,6 +95,7 @@ exports.updateTeamMember = async (req, res) => {
         bio: bio || '',
         gradient: gradient || 'linear-gradient(135deg, #161616 0%, #700a18 100%)',
         image: image || '',
+        empNo: empNo || '',
         order: order !== undefined ? Number(order) : 0
       },
       { new: true }

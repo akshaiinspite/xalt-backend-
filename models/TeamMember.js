@@ -7,6 +7,7 @@ const teamMemberSchema = new mongoose.Schema({
   bio: { type: String, default: '' },
   gradient: { type: String, default: 'linear-gradient(135deg, #161616 0%, #700a18 100%)' },
   image: { type: String, default: '' },
+  empNo: { type: String, default: '' },
   order: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now }
 });
