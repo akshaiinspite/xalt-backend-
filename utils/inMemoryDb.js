@@ -204,5 +204,65 @@ module.exports = {
   defaultExpertise,
   inMemoryExpertise,
   defaultTeamMembers,
-  inMemoryTeamMembers
+  inMemoryTeamMembers,
+  defaultAboutPhotos: [
+    {
+      _id: 'about-photo-1',
+      key: 'about_us_1',
+      title: 'X.Alt Modern Creative Studio Workspace',
+      label: '',
+      imageUrl: '/uploads/studio_workspace.png'
+    },
+    {
+      _id: 'about-photo-2',
+      key: 'about_us_2',
+      title: 'X.Alt Design Artists at Workstations',
+      label: '',
+      imageUrl: '/uploads/design_artists.png'
+    },
+    {
+      _id: 'about-photo-3',
+      key: 'studio_floor_1',
+      title: 'VFX Synthesis Bay',
+      label: '// ZONE_01: VFX SYNTHESIS BAY',
+      imageUrl: '/uploads/studio_floor_vfx.png'
+    },
+    {
+      _id: 'about-photo-4',
+      key: 'studio_floor_2',
+      title: 'Sonic Resonance Lab',
+      label: '// ZONE_02: SONIC MIXING SUITE',
+      imageUrl: '/uploads/studio_floor_audio.png'
+    }
+  ],
+  inMemoryAboutPhotos: [
+    {
+      _id: 'about-photo-1',
+      key: 'about_us_1',
+      title: 'X.Alt Modern Creative Studio Workspace',
+      label: '',
+      imageUrl: '/uploads/studio_workspace.png'
+    },
+    {
+      _id: 'about-photo-2',
+      key: 'about_us_2',
+      title: 'X.Alt Design Artists at Workstations',
+      label: '',
+      imageUrl: '/uploads/design_artists.png'
+    },
+    {
+      _id: 'about-photo-3',
+      key: 'studio_floor_1',
+      title: 'VFX Synthesis Bay',
+      label: '// ZONE_01: VFX SYNTHESIS BAY',
+      imageUrl: '/uploads/studio_floor_vfx.png'
+    },
+    {
+      _id: 'about-photo-4',
+      key: 'studio_floor_2',
+      title: 'Sonic Resonance Lab',
+      label: '// ZONE_02: SONIC MIXING SUITE',
+      imageUrl: '/uploads/studio_floor_audio.png'
+    }
+  ]
 };
