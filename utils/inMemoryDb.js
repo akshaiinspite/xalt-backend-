@@ -131,7 +131,7 @@ const defaultTeamMembers = [
     gradient: 'linear-gradient(135deg, #050505 0%, #300006 100%)',
     image: '/uploads/alex_mercer.png',
     empNo: '01',
-    order: 0
+    order: 1
   },
   {
     _id: 'team-2',
@@ -142,7 +142,7 @@ const defaultTeamMembers = [
     gradient: 'linear-gradient(135deg, #101012 0%, #440d16 100%)',
     image: '/uploads/sarah_connor.png',
     empNo: '02',
-    order: 1
+    order: 2
   },
   {
     _id: 'team-3',
@@ -153,7 +153,7 @@ const defaultTeamMembers = [
     gradient: 'linear-gradient(135deg, #1b0206 0%, #520510 100%)',
     image: '/uploads/david_miller.png',
     empNo: '03',
-    order: 2
+    order: 3
   },
   {
     _id: 'team-4',
@@ -164,7 +164,7 @@ const defaultTeamMembers = [
     gradient: 'linear-gradient(135deg, #161616 0%, #700a18 100%)',
     image: '/uploads/michael_chen.png',
     empNo: '04',
-    order: 3
+    order: 4
   },
   {
     _id: 'team-5',
@@ -175,7 +175,7 @@ const defaultTeamMembers = [
     gradient: 'linear-gradient(135deg, #120318 0%, #4a030a 100%)',
     image: '/uploads/marcus_vance.png',
     empNo: '05',
-    order: 4
+    order: 5
   },
   {
     _id: 'team-6',
@@ -186,7 +186,7 @@ const defaultTeamMembers = [
     gradient: 'linear-gradient(135deg, #040108 0%, #350218 100%)',
     image: '/uploads/liam_vance.png',
     empNo: '06',
-    order: 5
+    order: 6
   }
 ];
 

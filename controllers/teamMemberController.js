@@ -31,12 +31,12 @@ exports.createTeamMember = async (req, res) => {
       gradient: gradient || 'linear-gradient(135deg, #161616 0%, #700a18 100%)',
       image: image || '',
       empNo: empNo || '',
-      order: order !== undefined ? Number(order) : 0,
+      order: order !== undefined ? Number(order) : 1,
       createdAt: new Date()
     };
     inMemoryDb.inMemoryTeamMembers.push(newMember);
     // Sort in memory by order
-    inMemoryDb.inMemoryTeamMembers.sort((a, b) => (a.order || 0) - (b.order || 0));
+    inMemoryDb.inMemoryTeamMembers.sort((a, b) => (a.order || 1) - (b.order || 1));
     return res.status(201).json(newMember);
   }
 
@@ -49,7 +49,7 @@ exports.createTeamMember = async (req, res) => {
       gradient: gradient || 'linear-gradient(135deg, #161616 0%, #700a18 100%)',
       image: image || '',
       empNo: empNo || '',
-      order: order !== undefined ? Number(order) : 0
+      order: order !== undefined ? Number(order) : 1
     });
     await newMember.save();
     res.status(201).json(newMember);
@@ -79,9 +79,9 @@ exports.updateTeamMember = async (req, res) => {
       gradient: gradient || 'linear-gradient(135deg, #161616 0%, #700a18 100%)',
       image: image || '',
       empNo: empNo || '',
-      order: order !== undefined ? Number(order) : 0
+      order: order !== undefined ? Number(order) : 1
     };
-    inMemoryDb.inMemoryTeamMembers.sort((a, b) => (a.order || 0) - (b.order || 0));
+    inMemoryDb.inMemoryTeamMembers.sort((a, b) => (a.order || 1) - (b.order || 1));
     return res.json(inMemoryDb.inMemoryTeamMembers[idx]);
   }
 
@@ -96,7 +96,7 @@ exports.updateTeamMember = async (req, res) => {
         gradient: gradient || 'linear-gradient(135deg, #161616 0%, #700a18 100%)',
         image: image || '',
         empNo: empNo || '',
-        order: order !== undefined ? Number(order) : 0
+        order: order !== undefined ? Number(order) : 1
       },
       { new: true }
     );
