@@ -15,7 +15,7 @@ exports.getAllProjects = async (req, res) => {
 };
 
 exports.createProject = async (req, res) => {
-  const { category, subcategory, title, tag, code, year, client, image, video } = req.body;
+  const { category, subcategory, title, tag, code, year, client, image, video, galleryImages } = req.body;
   if (!category || !subcategory || !title || !tag || !image) {
     return res.status(400).json({ message: 'All project fields are required' });
   }
@@ -33,6 +33,7 @@ exports.createProject = async (req, res) => {
       client: client || '',
       image,
       video: video || '',
+      galleryImages: galleryImages || [],
       createdAt: new Date()
     };
     inMemoryDb.inMemoryProjects.unshift(newProject);
@@ -49,7 +50,8 @@ exports.createProject = async (req, res) => {
       year: year || code || '',
       client: client || '',
       image,
-      video: video || ''
+      video: video || '',
+      galleryImages: galleryImages || []
     });
     await newProject.save();
     res.status(201).json(newProject);
@@ -59,7 +61,7 @@ exports.createProject = async (req, res) => {
 };
 
 exports.updateProject = async (req, res) => {
-  const { category, subcategory, title, tag, code, year, client, image, video } = req.body;
+  const { category, subcategory, title, tag, code, year, client, image, video, galleryImages } = req.body;
   if (!category || !subcategory || !title || !tag || !image) {
     return res.status(400).json({ message: 'All project fields are required' });
   }
@@ -80,7 +82,8 @@ exports.updateProject = async (req, res) => {
       year: year || code || '',
       client: client || '',
       image,
-      video: video || ''
+      video: video || '',
+      galleryImages: galleryImages || []
     };
     return res.json(inMemoryDb.inMemoryProjects[projIndex]);
   }
@@ -97,7 +100,8 @@ exports.updateProject = async (req, res) => {
         year: year || code || '',
         client: client || '',
         image,
-        video: video || ''
+        video: video || '',
+        galleryImages: galleryImages || []
       },
       { new: true }
     );

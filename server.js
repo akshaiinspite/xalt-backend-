@@ -90,7 +90,9 @@ async function seedDefaultPortfolio() {
               code: proj.code || '',
               year: proj.year || proj.code || '2026',
               client: proj.client || '',
-              image: proj.image
+              image: proj.image,
+              video: proj.video || '',
+              galleryImages: proj.galleryImages || []
             });
           }
         }

@@ -10,6 +10,7 @@ const projectSchema = new mongoose.Schema({
   client: { type: String, default: '' },
   image: { type: String, required: true },
   video: { type: String, default: '' },
+  galleryImages: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now }
 });
 

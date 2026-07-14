@@ -5,6 +5,7 @@ const aboutPhotoSchema = new mongoose.Schema({
   title: { type: String, default: '' },
   label: { type: String, default: '' },
   imageUrl: { type: String, required: true },
+  imageUrls: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now }
 });
 

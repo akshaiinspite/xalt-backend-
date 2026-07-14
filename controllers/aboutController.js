@@ -15,7 +15,8 @@ async function seedDefaultAboutPhotosIfNeeded() {
           key: item.key,
           title: item.title,
           label: item.label,
-          imageUrl: item.imageUrl
+          imageUrl: item.imageUrl,
+          imageUrls: item.imageUrls || [item.imageUrl]
         });
       }
       console.log('Seeded default about photos successfully.');
@@ -41,7 +42,7 @@ exports.getAllAboutPhotos = async (req, res) => {
 };
 
 exports.createAboutPhoto = async (req, res) => {
-  const { key, title, label, imageUrl } = req.body;
+  const { key, title, label, imageUrl, imageUrls } = req.body;
   if (!key || !imageUrl) {
     return res.status(400).json({ message: 'Key and imageUrl are required' });
   }
@@ -54,6 +55,7 @@ exports.createAboutPhoto = async (req, res) => {
       title: title || '',
       label: label || '',
       imageUrl,
+      imageUrls: imageUrls || [imageUrl],
       createdAt: new Date()
     };
     inMemoryDb.inMemoryAboutPhotos.push(newPhoto);
@@ -61,7 +63,7 @@ exports.createAboutPhoto = async (req, res) => {
   }
 
   try {
-    const newPhoto = new AboutPhoto({ key, title, label, imageUrl });
+    const newPhoto = new AboutPhoto({ key, title, label, imageUrl, imageUrls: imageUrls || [imageUrl] });
     await newPhoto.save();
     res.status(201).json(newPhoto);
   } catch (err) {
@@ -70,7 +72,7 @@ exports.createAboutPhoto = async (req, res) => {
 };
 
 exports.updateAboutPhoto = async (req, res) => {
-  const { key, title, label, imageUrl } = req.body;
+  const { key, title, label, imageUrl, imageUrls } = req.body;
   if (!key || !imageUrl) {
     return res.status(400).json({ message: 'Key and imageUrl are required' });
   }
@@ -86,7 +88,8 @@ exports.updateAboutPhoto = async (req, res) => {
       key,
       title: title || '',
       label: label || '',
-      imageUrl
+      imageUrl,
+      imageUrls: imageUrls || [imageUrl]
     };
     return res.json(inMemoryDb.inMemoryAboutPhotos[idx]);
   }
@@ -94,7 +97,7 @@ exports.updateAboutPhoto = async (req, res) => {
   try {
     const updated = await AboutPhoto.findByIdAndUpdate(
       req.params.id,
-      { key, title, label, imageUrl },
+      { key, title, label, imageUrl, imageUrls: imageUrls || [imageUrl] },
       { new: true }
     );
     if (!updated) {

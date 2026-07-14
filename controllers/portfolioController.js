@@ -29,6 +29,7 @@ exports.getPortfolio = async (req, res) => {
           title: sub.title,
           description: sub.description,
           image: sub.image,
+          video: sub.video || '',
           galleryItems: subProjs.map(proj => ({
             _id: proj._id,
             title: proj.title,
@@ -37,7 +38,8 @@ exports.getPortfolio = async (req, res) => {
             year: proj.year || proj.code || '',
             client: proj.client || '',
             image: proj.image,
-            video: proj.video || ''
+            video: proj.video || '',
+            galleryImages: proj.galleryImages || []
           }))
         };
       });
@@ -86,7 +88,7 @@ exports.updateCategory = async (req, res) => {
 };
 
 exports.createSubcategory = async (req, res) => {
-  const { category, title, description, image } = req.body;
+  const { category, title, description, image, video } = req.body;
   if (!category || !title || !description || !image) {
     return res.status(400).json({ message: 'Category, title, description and image are required' });
   }
@@ -98,14 +100,15 @@ exports.createSubcategory = async (req, res) => {
       category,
       title,
       description,
-      image
+      image,
+      video: video || ''
     };
     inMemoryDb.inMemorySubcategories.push(newSub);
     return res.status(201).json(newSub);
   }
 
   try {
-    const newSub = new SubcategoryDetail({ category, title, description, image });
+    const newSub = new SubcategoryDetail({ category, title, description, image, video: video || '' });
     await newSub.save();
     res.status(201).json(newSub);
   } catch (err) {
@@ -115,7 +118,7 @@ exports.createSubcategory = async (req, res) => {
 
 exports.updateSubcategory = async (req, res) => {
   const { id } = req.params;
-  const { title, description, image } = req.body;
+  const { title, description, image, video } = req.body;
   if (!title || !description || !image) {
     return res.status(400).json({ message: 'Title, description and image are required' });
   }
@@ -125,7 +128,7 @@ exports.updateSubcategory = async (req, res) => {
     const subIdx = inMemoryDb.inMemorySubcategories.findIndex(s => s._id === id);
     if (subIdx === -1) return res.status(404).json({ message: 'Subcategory not found' });
     const oldTitle = inMemoryDb.inMemorySubcategories[subIdx].title;
-    inMemoryDb.inMemorySubcategories[subIdx] = { ...inMemoryDb.inMemorySubcategories[subIdx], title, description, image };
+    inMemoryDb.inMemorySubcategories[subIdx] = { ...inMemoryDb.inMemorySubcategories[subIdx], title, description, image, video: video || '' };
     inMemoryDb.inMemoryProjects = inMemoryDb.inMemoryProjects.map(p => {
       if (p.subcategory.toLowerCase() === oldTitle.toLowerCase()) {
         return { ...p, subcategory: title };
@@ -142,6 +145,7 @@ exports.updateSubcategory = async (req, res) => {
     sub.title = title;
     sub.description = description;
     sub.image = image;
+    sub.video = video || '';
     await sub.save();
 
     await Project.updateMany(
