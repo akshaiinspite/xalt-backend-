@@ -41,6 +41,14 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Prevent caching of API responses
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  next();
+});
+
 // Seeding Helpers
 async function seedDefaultAdmin() {
   try {
@@ -98,6 +106,14 @@ async function seedDefaultPortfolio() {
         }
       }
       console.log('Seeding default portfolio completed successfully.');
+    } else {
+      // Keep category descriptions updated in database if they already exist
+      for (const cat of defaultPortfolio) {
+        await CategoryDetail.updateOne(
+          { id: cat.id },
+          { $set: { description: cat.description } }
+        );
+      }
     }
   } catch (err) {
     console.error('Error seeding default portfolio:', err);
