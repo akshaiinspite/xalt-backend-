@@ -49,6 +49,7 @@ exports.updateReel = async (req, res) => {
     } else {
       reel.title = title;
       reel.videoUrl = videoUrl;
+      
       if (heroVideoUrl !== undefined) {
         reel.heroVideoUrl = heroVideoUrl;
       }
