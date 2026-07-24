@@ -57,21 +57,43 @@ const upload = multer({
 });
 
 // POST endpoint for file upload (protected by authentication)
-router.post('/', authenticateJWT, upload.single('file'), (req, res) => {
+router.post('/', authenticateJWT, upload.single('file'), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ message: 'No file uploaded' });
     }
 
+    let finalFilename = req.file.filename;
+
+    // Auto-compress uploaded images with Sharp
+    if (req.file.mimetype.startsWith('image/') && !req.file.mimetype.includes('svg')) {
+      try {
+        const sharp = require('sharp');
+        const ext = path.extname(req.file.filename);
+        const baseName = path.basename(req.file.filename, ext);
+        const webpFilename = `${baseName}.webp`;
+        const webpPath = path.join(uploadDir, webpFilename);
+
+        await sharp(req.file.path)
+          .resize(1920, 1080, { fit: 'inside', withoutEnlargement: true })
+          .webp({ quality: 80 })
+          .toFile(webpPath);
+
+        finalFilename = webpFilename;
+      } catch (sharpError) {
+        console.warn('Image optimization skipped or error:', sharpError.message);
+      }
+    }
+
     // Generate absolute URL to access the uploaded file
     const host = req.get('host'); // E.g., localhost:5000
     const protocol = req.protocol; // E.g., http
-    const fileUrl = `${protocol}://${host}/uploads/${req.file.filename}`;
+    const fileUrl = `${protocol}://${host}/uploads/${finalFilename}`;
 
     res.status(200).json({
       message: 'File uploaded successfully',
       url: fileUrl,
-      filename: req.file.filename
+      filename: finalFilename
     });
   } catch (error) {
     res.status(500).json({ message: 'Error uploading file', error: error.message });
